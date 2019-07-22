@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'plan_app/css/style.css' %}">
+</head>
+<body>
+    
+    <div class = "container">
+
+        <div class = "register">
+            <h1> Registration </h1>
+            <form action = "/process" class = "form-group" method = "post">
+                {% if messages %}
+                {% for message in messages %}
+                    <p class = "error">{{ message }}</p>
+                {% endfor %}
+                {% endif %}
+                {% csrf_token %}
+                <input type = "hidden" name = "form" value = "register">
+                <label for = "first name">First Name:</label>
+                <input type = "text" class = "form-control" name = "fname">
+                <label for = "last name">Last Name:</label>
+                <input type = "text" class = "form-control" name = "lname">
+                <label for = "email">Email:</label>
+                <input type = "text" class = "form-control" name = "email">
+                <label for = "password">Password:</label>
+                <input type = "password" class = "form-control" name = "password">
+                <label for = "passconfirm">Confirm Password:</label>
+                <input type = "password" class = "form-control" name = "passconfirm">
+                <input type = "submit" class = "btn btn-primary" value = "Register">
+            </form>
+        </div>
+
+        <div class = "login">
+            <h1> Login </h1>
+            <form action = "/process" class = "form-group" method = "post">
+                {% csrf_token %}
+                <input type = "hidden" name = "form" value = "login">
+                <label for = "email">Email:</label>
+                <input type = "text" class = "form-control" name = "email">
+                <label for = "password">Password:</label>
+                <input type = "password" class = "form-control" name = "password">
+                <input type = "submit" class = "btn btn-primary" value = "Login">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

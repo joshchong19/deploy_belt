@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'plan_app/css/style.css' %}">
+</head>
+<body>
+    
+    <div class = "container">
+        
+        <div class = "logout">
+            <a href = "/logout">Log out</a>
+        </div>
+
+        <div class = "head">
+            <h1>Hello {{ user.first_name }}! Let's edit your trip!</h1>
+        </div>
+
+        <div class = "main">
+            {% if messages %}
+            {% for message in messages %}
+            <p class = "error">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            <form action = "/update/{{trip.id}}" class = "form-group" method = "post">
+                {% csrf_token %}
+                <label for = "destination">Destination:</label>
+                <input type = "text" name = "destination" class = "form-control" value = "{{trip.destination}}">
+                <label for = "start">Start Date:</label>
+                <input type = "text" name = "start" class = "form-control" value = "{{trip.start_date}}">
+                <label for = "end">End Date:</label>
+                <input type = "text" name = "end" class = "form-control" value = "{{trip.end_date}}">
+                <label for = "plan">Plan:</label>
+                <textarea name = "plan" class = "form-control" rows = "3">{{trip.plan}}</textarea>
+                <input type = "submit" name = "cancel" value = "Cancel" class = "btn btn-danger">
+                <input type = "submit" name = "submit" value = "Submit" class = "btn btn-primary">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
