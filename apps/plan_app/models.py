@@ -81,7 +81,7 @@ class Trips(models.Model):
     start_date = models.CharField(max_length = 10)
     end_date = models.CharField(max_length = 10)
     plan = models.TextField()
-    created_by = models.ForeignKey(Users, related_name = "created_trips")
+    created_by = models.ForeignKey(Users, related_name = "created_trips", on_delete = models.CASCADE)
     users_attending = models.ManyToManyField(Users, related_name = "attending_trips")
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
